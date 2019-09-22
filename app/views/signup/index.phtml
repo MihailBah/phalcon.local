@@ -1,0 +1,32 @@
+<h2>Sign up using this form</h2>
+
+<p><?php echo $this->flashSession->output() ?></p>
+
+<?php echo $this->tag->form("signup/register"); ?>
+
+    <div class="form-group">
+        <label for="name">Name</label>
+        <?php echo $form->render('name'); ?>
+    </div>
+
+    <div class="form-group">
+        <label for="email">E-Mail</label>
+        <?php echo $form->render('email'); ?>
+    </div>
+    
+    <div class="form-group">
+        <label for="phone">Phone</label>
+        <?php echo $form->render('phone'); ?>
+    </div>
+
+    <div class="form-group">
+        <label for="nationality">Nationality</label>
+        <?php echo $form->render('nationality'); ?>
+    </div>
+    
+    <div class="form-group">    
+        <?php echo $form->render('submit'); ?>
+    </div>
+
+</form>
+
