@@ -2,11 +2,21 @@
 
 namespace App\myValidator;
 
-class minLength
+use App\myValidator\myValidatorInterface;
+
+class minLength implements myValidatorInterface
 {
-	public function validate($key, $value, $min=10){
-		if(strlen($value) < $min) {
-			return "String $key cannot be shorter than $min characters";
+	public $min = 10;
+
+	public function __construct(...$param){
+		if($param){
+			$this->min = $param[0];
+		}
+	}
+	
+	public function validate($type, $value, $form){
+		if(strlen($value) < $this->min) {
+			return "String $type cannot be shorter than $this->min characters";
 		}	
 	}
 }

@@ -2,12 +2,14 @@
 
 namespace App\myValidator;
 
-class myEmail
+use App\myValidator\myValidatorInterface;
+
+class myEmail implements myValidatorInterface
 {
-	public function validate($key, $value){
+	public function validate($type, $value, $form){
 
 		if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
-	    	return "String Email $value is not valid email";
+	    	return "String $type - $value is not valid email";
 		}
 	}
 }

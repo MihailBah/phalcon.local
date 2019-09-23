@@ -7,6 +7,13 @@ use App\Forms\RegisterForm;
 
 use App\myValidator\myValidator;
 
+use App\myValidator\myEmail;
+use App\myValidator\maxLength;
+use App\myValidator\minLength;
+use App\myValidator\isNumeric;
+use App\myValidator\myInclusionin;
+use App\myValidator\myPresenceOf;
+
 class SignupController extends Controller
 {
 	public function indexAction()
@@ -30,7 +37,28 @@ class SignupController extends Controller
 		// 	}
 		// }
 
-		$validator = new MyValidator();
+		// var_dump($this->request->getPost());exit;
+
+		$validator = new myValidator();
+
+		$emailValidator = new myEmail();
+		$maxLengthValidator = new maxLength();
+		$minLengthValidator = new minLength();
+		$isNumericValidator = new isNumeric();
+		$myInclusioninValidator = new myInclusionin();
+		$myPresenceof = new myPresenceof();
+
+		$validator->subscribe($emailValidator, 'email');
+		$validator->subscribe($maxLengthValidator, 'name');
+		$validator->subscribe($minLengthValidator, 'phone');
+		$validator->subscribe($isNumericValidator, 'phone');
+		$validator->subscribe($myInclusioninValidator, 'nationality');
+		$validator->subscribe($myPresenceof, 'nationality');
+		$validator->subscribe($myPresenceof, 'phone');
+		$validator->subscribe($myPresenceof, 'name');
+		$validator->subscribe($myPresenceof, 'email');
+
+
 		$messages = $validator->validate($this->request->getPost(), $form);
 		
 		foreach ($messages as $message) {
@@ -38,7 +66,6 @@ class SignupController extends Controller
 				$this->flashSession->error($message);
 			}
 		}
-
         return $this->response->redirect('signup');		
 	}
 }

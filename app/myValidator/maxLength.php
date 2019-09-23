@@ -2,11 +2,21 @@
 
 namespace App\myValidator;
 
-class maxLength
+use App\myValidator\myValidatorInterface;
+
+class maxLength implements myValidatorInterface
 {
-	public function validate($key, $value, $max=70){
-		if(strlen($value) > $max) {
-			return "String $key cannot be longer than $max characters";
+	public $max = 70;
+
+	public function __construct(...$param){
+		if ($param){
+			$this->max = $param[0];
+		}
+	}
+
+	public function validate($type, $value, $form){
+		if(strlen($value) > $this->max) {
+			return "String $type cannot be longer than $this->max characters";
 		}	
 	}
 }

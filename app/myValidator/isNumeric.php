@@ -3,11 +3,13 @@
 
 namespace App\myValidator;
 
-class isNumeric
+use App\myValidator\myValidatorInterface;
+
+class isNumeric implements myValidatorInterface
 {
-	public function validate($key, $value) {
+	public function validate($type, $value, $form) {
 		if (!ctype_digit($value)) {
-			return "The string $key should contain only numbers";
+			return "The string $type should contain only numbers";
 		}
 	}
 }

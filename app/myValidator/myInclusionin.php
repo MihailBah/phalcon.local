@@ -2,11 +2,14 @@
 
 namespace App\myValidator;
 
-class myInclusionin
+use App\myValidator\myValidatorInterface;
+
+class myInclusionin implements myValidatorInterface
 {
-	public function validate($key, $value, $arr) {
+	public function validate($type, $value, $form) {
+		$arr = $form->getElements()[$type]->getOptions();
 		if(!array_key_exists($value, $arr)) {
-			return "The string $key contains an invalid value";
+			return "The string $type contains an invalid value";
 		}
 	}
 }
